@@ -3,13 +3,13 @@ código. Los importes se cobran según la siguiente tabla:*/
 
 #include <stdio.h>
 #include <ctype.h>
-#include <locale.h>
+#include <locale.h>  //Idioma
 
 int main(){
 	int nroHistoria,importe;
 	char cod;
 	
-	setlocale(LC_ALL,"spanish");
+	setlocale(LC_ALL,"spanish"); //Permite poner tildes y símbolos del español
 	
 	printf("Ingrese su número de historia clínica: ");
 	scanf("%d",&nroHistoria);
