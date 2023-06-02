@@ -44,8 +44,19 @@ int main(){
 		
 		for(i=1;i<=5;i++){ 
 		
-			printf("\nIngrese coordenadas del tiro (X-Y): ");
-			scanf("%d%d",&X,&Y);
+			do{
+				printf("\nIngrese coordenadas del disparo (X-Y)\n ");
+				printf("X: ");
+				scanf("%d",&X);
+				printf("Y: ");
+				scanf("%d",&Y);
+			
+				if((X!=0 && Y==0)||(Y!=0 && X==0)){
+					printf("\nERROR, disparo sobre alguno de los ejes, vuelva a disparar\n\n ");
+				}
+				
+			}while((X!=0 && Y==0)||(Y!=0 && X==0));
+			
 			nro=cuadrante(X,Y);  
 			
 			switch(nro){
@@ -69,7 +80,7 @@ int main(){
 		
 		punTotal=puntaje(cont0,cont1,cont2,cont3,cont4); 
 		
-		printf("\nPuntaje obtenido por el participante %d : %d \n\nRealizó: \n%d tiros en el cuadrante 1 \n%d tiros en el cuadrante 2 \n%d tiros en el cuadrante 3 \n%d tiros en el cuadrante 4 \n%d tiros en el cuadrante 0", ID,punTotal,cont1,cont2,cont3,cont4,cont0);
+		printf("\nPuntaje obtenido por el participante %d : %d \n\nRealizó: \n%d disparos en el cuadrante 1 \n%d disparos en el cuadrante 2 \n%d disparos en el cuadrante 3 \n%d disparos en el cuadrante 4 \n%d disparos en el cuadrante 0", ID,punTotal,cont1,cont2,cont3,cont4,cont0);
 		
 		if(punTotal>puntGanador){
 			idGanador=ID;
@@ -120,7 +131,6 @@ int cuadrante(int x,int y){
 	 		
 	return nroCuadrante;	
 }
-
 
 
 int puntaje(int N0,int N1,int N2,int N3,int N4){
