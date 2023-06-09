@@ -134,11 +134,10 @@ float mayorValor(float a,float b,float c){
 	if(b>mayor){
 		mayor=b;
 	}
-	else{
-		if(c>mayor){
-			mayor=c;
-		}
-	}	
+	if(c>mayor){
+		mayor=c;
+	}
+		
 	
 	return mayor;
 }
