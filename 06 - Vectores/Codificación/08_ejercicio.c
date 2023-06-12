@@ -28,10 +28,9 @@ void mostrar(float[],int);
 void raiz(float[],float[],int);
 void sumaVectores(float[],float[],float[],int);
 void ordenInverso(float[],float[],int);
-int busqueda(float[],int,int);
-void valorMaximo(float[],);
-
-
+int busqueda(float[],int,float);
+void valorMaximo(float[],int);
+void valorMinimo(float[],int);
 
 
 //main
@@ -40,17 +39,29 @@ int main(){
 	float VB[TAM];
 	float VC[TAM];
 	float VD[TAM];
+	float BUS;
+	int pos;
 	
 	
 	carga(VA,TAM);
 	raiz(VA,VB,TAM);
 	sumaVectores(VA,VB,VC,TAM);
 	ordenInverso(VC,VD,TAM);
+	valorMaximo(VA,TAM);
+	valorMinimo(VB,TAM);
+	
+	printf("\nIngrese un valor a buscar en el vector VC: ");
+	scanf("%f",&BUS);	
+	pos=busqueda(VC,TAM,BUS);
+	if(pos==-1){
+		printf("\nNo se encontró el vector que busca\n");
+	}
+	else{
+		printf("Se encontró en la posición: %d",pos);
+	}
 	
 	return 0;
 }
-
-
 
 
 //Definición de funciones
@@ -112,7 +123,68 @@ void ordenInverso(float VC[],float VD[],int ce){
 	mostrar(VD,ce);	
 }
 
+int busqueda(float v[],int ce,float x){
+	int i=0;
+	int pos=-1;
+	
+	while(i<ce && pos==-1){
+		if(v[i]==x){
+			pos=i;
+		}
+		else{
+			i++;
+		}		
+	}
+	
+	return pos;
+	
+}
 
+void valorMaximo(float VA[],int ce){
+	int band=0;
+	int i,pos;
+	float mayor;
+	
+	
+	for(i=0;i<ce;i++){
+		if(band==0){
+			mayor=VA[i];
+			band=1;
+		}
+		else{
+			if(VA[i]>mayor){
+				mayor=VA[i];
+			}
+		}		
+	}
+	
+	printf("\nEl mayor es: %.2f\n",mayor);
+	pos=busqueda(VA,ce,mayor); //no se repite entonces uso la función búsqueda
+	printf("\nEncontrado en la posición: %d", pos);
+}
 
-
-
+void valorMinimo(float VB[],int ce){
+	int band=0;
+	int i,pos;
+	float menor;
+	
+	
+	for(i=0;i<ce;i++){
+		if(band==0){
+			menor=VB[i];
+			band=1;
+		}
+		else{
+			if(VB[i]<menor){
+				menor=VB[i];
+			}
+		}		
+	}
+	
+	printf("\nEl menor es: %.2f\n",menor);
+	for(i=0;i<ce;i++){
+		if(VB[i]==menor)
+		printf("\nEncontrado en la posición: %d\n",i);
+	}
+	
+}
