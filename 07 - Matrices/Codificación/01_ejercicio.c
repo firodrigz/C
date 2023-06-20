@@ -6,26 +6,20 @@ constante.*/
 #define COLUMNAS 3
 
 void ingresarMatriz(int [][COLUMNAS]);
-void multiplicarMatrizPorConstante(int [][COLUMNAS], int);
+void multiplicarMatrizPorConstante(int [][COLUMNAS]);
 void imprimirMatriz(int [][COLUMNAS]);
 
 int main() {
     int matriz[FILAS][COLUMNAS];
-    int constante;
-    
+        
     ingresarMatriz(matriz);
-    
-    printf("Ingrese un número entero para multiplicar la matriz: ");
-    scanf("%d", &constante);
-    
-    multiplicarMatrizPorConstante(matriz, constante);
-    
+    multiplicarMatrizPorConstante(matriz);
     imprimirMatriz(matriz);
     
     return 0;
 }
 
-void ingresarMatriz(int matriz[FILAS][COLUMNAS]) {
+void ingresarMatriz(int matriz[][COLUMNAS]) {
     int i, j;
     
     printf("Ingrese los elementos de la matriz:\n");
@@ -38,8 +32,12 @@ void ingresarMatriz(int matriz[FILAS][COLUMNAS]) {
     }
 }
 
-void multiplicarMatrizPorConstante(int matriz[FILAS][COLUMNAS], int constante) {
+void multiplicarMatrizPorConstante(int matriz[][COLUMNAS]) {
     int i, j;
+    int constante;
+    
+    printf("Ingrese un número entero para multiplicar la matriz: ");
+    scanf("%d", &constante);    
     
     for (i = 0; i < FILAS; i++) {
         for (j = 0; j < COLUMNAS; j++) {
@@ -48,7 +46,7 @@ void multiplicarMatrizPorConstante(int matriz[FILAS][COLUMNAS], int constante) {
     }
 }
 
-void imprimirMatriz(int matriz[FILAS][COLUMNAS]) {
+void imprimirMatriz(int matriz[][COLUMNAS]) {
     int i, j;
     
     printf("La matriz resultante es:\n");
