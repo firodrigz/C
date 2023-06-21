@@ -18,119 +18,112 @@ todo el cine ordenado de mayor a menor. Por ejemplo:
 Butaca Cantidad
 1 20
 3 15
-2 10
- ..............*/
+2 10*/
  
-#include <stdio.h>
-#include <stdlib.h>
 
-int ValidarButaca(int, int, int);
-void MostrarButacas(char[][9], int, int);
-void ContarAsientos(char[][9], int, int);
-void FilasVacias(char[][9], int, int);
-void FilaMayorCant(char[][9], int, int);
-void EncontrarButaca(char[][9], int, int);
-void LlenarButacas(char[][9], int, int, char);
-int ValidarFila(int, int, int);
+#include <stdio.h>
+#define FILAS 12
+#define COLUMNAS 9
+
+int validarIngreso(int,int);
+void cargaMatriz(char[][COLUMNAS],int,int);
+int busqueda(char[][COLUMNAS],int,int);
+void mostrarMatriz(char[][COLUMNAS],int);
+void contarAsientos(char[][COLUMNAS], int, int);
+void filasVacias(char[][COLUMNAS], int, int);
+void filaMayorCant(char[][COLUMNAS], int, int);
+
 
 int main(){
-	char sala[12][9];
-	int butaca, fila, verif, valid;
+	char sala[FILAS][COLUMNAS];
+	int butacas, fila;
 	
-	LlenarButacas(sala,12,9,'D');
-	MostrarButacas(sala,12,9);
+	cargaMatriz(sala,FILAS,COLUMNAS);
+	mostrarMatriz(sala,FILAS);
 	
-	do{
-		printf("Ingrese fila (1-12): ");
-		scanf("%d",&fila);
-		
-		verif = ValidarFila(fila,1,12);
-	}while(verif == 1);
+	printf("\n-- Ingreso de fila --\n");
+	fila=validarIngreso(1,FILAS);
 	
 	while(fila > 0){
-		do{
-		printf("Ingrese butaca a reservar (1-9): ");
-		scanf("%d",&butaca);
 		
-		valid = ValidarButaca (1,9,butaca);
-		}while(valid == 1);
+		printf("\n-- Ingreso de butaca --\n");
+		butacas=validarIngreso(1,COLUMNAS);
 		
-		EncontrarButaca(sala, fila, butaca);
-		MostrarButacas(sala,12,9);
+		busqueda(sala,fila,butacas);
+		mostrarMatriz(sala,FILAS);
 		
-		do{
-			printf("Ingrese fila (1-12): ");
-			scanf("%d",&fila);
-			
-			verif = ValidarFila(fila,1,12);
-		}while(verif == 1);
+		printf("\n-- Ingreso de fila --\n");
+		fila=validarIngreso(1,FILAS);
 	}
 	
-	ContarAsientos(sala,12,9);
-	FilasVacias(sala,12,9);
-	FilaMayorCant(sala,12,9);
+	contarAsientos(sala,12,9);
+	filasVacias(sala,12,9);
+	filaMayorCant(sala,12,9);	
+	
+	return 0;
 }
 
-void LlenarButacas(char sala[][9], int maxFilas, int maxCol, char car){
-	int i,j;
+int validarIngreso(int LI, int LS){
+	int nro;
+	int band = 0;
 	
-	for(i= 0; i<maxFilas;i++){
-		for(j = 0; j < maxCol; j++){
-			sala[i][j] = car;
+	do{
+		if(band==0){
+			printf("Ingrese valor entre %d - %d : ", LI,LS);
+			band++;
 		}
-	}
+		else{
+			printf("Valor fuera de rango, porfavor ingrese valor entre %d - %d : ", LI,LS);
+		}
+		
+		scanf("%d",&nro);
+		
+	}while(nro>LS);
+	
+	
+	return nro;
 }
 
-void MostrarButacas(char sala[][9], int maxFila, int maxCol){
+void cargaMatriz(char sala[][COLUMNAS],int cf,int cc){
+	int i, j;
+	
+	printf(" Disponibilidad total de la sala\n");
+	
+	for(i = 0; i < cf; i++){
+		for(j = 0; j < cc; j++){
+			sala[i][j] = 'D'; 
+		}
+	}	
+}
+
+int busqueda(char sala[][COLUMNAS],int fila,int butaca){
 	int i,j;
 	
-	printf("8 | 6 | 4 | 2 | 1 | 3 | 5 | 7 | 9\n");
-	printf("=================================\n");
+	if(sala[fila-1][butaca-1] == 'D'){
+		sala[fila-1][butaca-1] = 'R';
+	}
+	else{
+		printf("ERROR! Esa butaca ya esta reservada. Intente otra por favor\n");
+	}	
+}
+
+void mostrarMatriz(char sala[][COLUMNAS],int cf){
+	int i,j;
 	
-	for(i = 0; i < maxFila; i++){
-		printf("%c | %c | %c | %c | %c | %c | %c | %c | %c\n", sala[i][7],sala[i][5],
+	printf("\n     | 8 | 6 | 4 | 2 | 1 | 3 | 5 | 7 | 9 |\n");
+	printf("-----|====================================\n");
+	
+	for(i = 0; i < cf; i++){
+		printf("| %-2d | %c | %c | %c | %c | %c | %c | %c | %c | %c |\n", i+1,sala[i][7],sala[i][5],
 		sala[i][3],sala[i][1],sala[i][0],sala[i][2],sala[i][4],sala[i][6],sala[i][8]);
 	}
 }
 
-int ValidarFila(int nFila, int min, int max){
-	int valid;
-	
-	if(nFila <= 12 && nFila != 0){
-		valid = 0;
-	}else{
-		valid = 1;
-	}
-	
-	return valid;
-}
-
-int ValidarButaca(int min, int max, int butaca){
-	int valid;
-	
-	if(butaca >= min && butaca <= max){
-		valid = 0;
-	}else{
-		valid = 1;
-	}
-	
-	return valid;
-}
-
-void EncontrarButaca(char sala[][9], int fila, int butaca){
-
-	if(sala[fila-1][butaca-1] == 'D'){
-		sala[fila-1][butaca-1] = 'R';
-	}else{
-		printf("Esa butaca ya esta reservada. Intente otra por favor\n");
-	}
-}
-
-void ContarAsientos(char sala[][9], int maxFila, int maxCol){
+void contarAsientos(char sala[][COLUMNAS], int cf, int cc){
 	int i, j, contDis =0, contRes = 0;
 	
-	for(i = 0; i < maxFila; i++){
-		for(j = 0; j < maxCol; j++){
+	for(i = 0; i < cf; i++){
+		for(j = 0; j < cc; j++){
 			if(sala[i][j] == 'D'){
 				contDis++;
 			}else{
@@ -142,11 +135,11 @@ void ContarAsientos(char sala[][9], int maxFila, int maxCol){
 	printf("Disponibles: %d | Reservados: %d\n", contDis, contRes);
 }
 
-void FilasVacias(char sala[][9], int maxFila, int maxCol){
+void filasVacias(char sala[][COLUMNAS], int cf, int cc){
 	int i,j, contVacio = 0;
 	
-	for(i = 0; i < maxFila; i++){
-		for (j = 0; j < maxCol; j++){
+	for(i = 0; i < cf; i++){
+		for (j = 0; j < cc; j++){
 			if(sala[i][j] == 'D'){
 				contVacio++;
 			}
@@ -158,11 +151,11 @@ void FilasVacias(char sala[][9], int maxFila, int maxCol){
 	}
 }
 
-void FilaMayorCant(char sala[][9], int maxFila, int maxCol){
-	int i,j, mayor = 0, band = 1, cont = 0, vEspec[maxFila];
+void filaMayorCant(char sala[][COLUMNAS], int cf, int cc){
+	int i,j, mayor = 0, band = 1, cont = 0, vEspec[cf];
 	
-	for(i = 0; i < maxFila; i++){
-		for (j = 0; j < maxCol; j++){
+	for(i = 0; i < cf; i++){
+		for (j = 0; j < cc; j++){
 			if(sala[i][j] == 'R'){
 				cont++;
 			}
@@ -175,10 +168,9 @@ void FilaMayorCant(char sala[][9], int maxFila, int maxCol){
 		cont = 0;
 	}
 	
-	for (i = 0; i < maxFila;i++){
+	for (i = 0; i < cf;i++){
 		if(vEspec[i] == mayor){
 			printf("La fila %d tuvo la mayor cantidad de espectadores\n",i+1);
 		}
 	}
 }
-
