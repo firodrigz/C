@@ -56,9 +56,9 @@ int main(){
 		fila=validarIngreso(1,FILAS);
 	}
 	
-	contarAsientos(sala,12,9);
-	filasVacias(sala,12,9);
-	filaMayorCant(sala,12,9);	
+	contarAsientos(sala,FILAS,COLUMNAS);
+	filasVacias(sala,FILAS,COLUMNAS);
+	filaMayorCant(sala,FILAS,COLUMNAS);	
 	
 	return 0;
 }
