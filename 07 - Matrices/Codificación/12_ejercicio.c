@@ -126,5 +126,5 @@ void menor(int cantSucur[], int tam) {
         }
     }
 
-    printf("\nEl menor es: %d, encontrado en la posicion %d", menor, pos + 1);
+    printf("\nEl menor es: %d, encontrado en la posicion %d", menor, pos);
 }
