@@ -1,14 +1,14 @@
 /*Un laboratorio dispone de una lista con sus 50 medicamentos. De cada uno conoce: 
-• Código del medicamento (entero, de 3 cifras). 
-• Precio (real). 
-• Stock (entero). 
+ï¿½ Cï¿½digo del medicamento (entero, de 3 cifras). 
+ï¿½ Precio (real). 
+ï¿½ Stock (entero). 
 
 Se solicita: 
-a. Declarar un tipo de dato que contenga la información del medicamento. 
+a. Declarar un tipo de dato que contenga la informaciï¿½n del medicamento. 
 b. Declarar un vector de estructura de tipo de datos creado en a. 
-c. Cargar en un sector de estructuras, los datos referentes a los medicamentos. Función INGRESO. 
-d. Consultar el precio según código del medicamento. Función BUSQUEDA_MEDI. 
-e. Informar los códigos de los medicamentos cuyo stock es inferior a 10 unidades. Función INFORME. */
+c. Cargar en un sector de estructuras, los datos referentes a los medicamentos. Funciï¿½n INGRESO. 
+d. Consultar el precio segï¿½n cï¿½digo del medicamento. Funciï¿½n BUSQUEDA_MEDI. 
+e. Informar los cï¿½digos de los medicamentos cuyo stock es inferior a 10 unidades. Funciï¿½n INFORME. */
 
 #include <stdio.h>
 #include <string.h>
@@ -85,11 +85,11 @@ int ingreso (struct medicamentos medi[], int limite){
 	printf("Listado de medicamentos!\n");
 	do{
 			if(band==0){
-				printf("\nIngrese código del producto(%d) (termina con 0): ",seingreso+1);
+				printf("\nIngrese cï¿½digo del producto(%d) (termina con 0): ",seingreso+1);
 				band++;
 			}
 			else{
-				printf("\nCódigo del producto %d ingresado ya se encuentra en los registros, ingrese otro: ", seingreso+1);	
+				printf("\nCï¿½digo del producto %d ingresado ya se encuentra en los registros, ingrese otro: ", seingreso+1);	
 			}
 			
 			cod=validar(100,999,0);
@@ -112,11 +112,11 @@ int ingreso (struct medicamentos medi[], int limite){
 		
 		do{
 			if(band==0){
-				printf("\nIngrese código del producto(%d) (termina con 0): ",seingreso+1);
+				printf("\nIngrese cï¿½digo del producto(%d) (termina con 0): ",seingreso+1);
 				band++;
 			}
 			else{
-				printf("\nCódigo del producto %d ingresado ya se encuentra en los registros, ingrese otro: ", seingreso+1);	
+				printf("\nCï¿½digo del producto %d ingresado ya se encuentra en los registros, ingrese otro: ", seingreso+1);	
 			}
 			
 			cod=validar(100,999,0);
@@ -130,17 +130,17 @@ void busqueda_medi(struct medicamentos medi[], int cantcargado){
 	
 	int cod=1, poscodigo;
 	
-	printf("\nConsulta de precios según código del medicamento!\n");
+	printf("\nConsulta de precios segï¿½n cï¿½digo del medicamento!\n");
 	
 	while(cod!=0){
 				
-		printf("\nIngrese código del medicamento que desea consultar su precio (0 para salir de la consulta): ");
+		printf("\nIngrese cï¿½digo del medicamento que desea consultar su precio (0 para salir de la consulta): ");
 		cod=validar(100,999,0);
 		
 		if(cod!=0){
 			poscodigo=busquedacodigosrepetidos(medi,cod,cantcargado);
 			if(poscodigo==-1){
-				printf("\nError!, código no encontrado!");
+				printf("\nError!, cï¿½digo no encontrado!");
 			}
 			else{
 				printf("\nPrecio: %.2f", medi[poscodigo].precio);
@@ -149,7 +149,7 @@ void busqueda_medi(struct medicamentos medi[], int cantcargado){
 	}	
 }
 
-//Informar los códigos de los medicamentos cuyo stock es inferior a 10 unidades. Función INFORME.
+//Informar los cï¿½digos de los medicamentos cuyo stock es inferior a 10 unidades. Funciï¿½n INFORME.
 
 void informe(struct medicamentos medi[], int cantcargado){
 	
